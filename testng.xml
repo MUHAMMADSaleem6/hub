@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Suite">
+  <test thread-count="5" name="Test">
+    <classes>
+      <class name="com.oath.automation.pages.GoogleTestPage"/>
+      <class name="com.oath.automation.pages.GoogleTestPage2"/>
+      <class name="com.oath.automation.test.GoogleTestWithExcel"/>
+      <class name="com.oath.automation.test.GoogleTest2"/>
+      <class name="com.oath.automation.test.GoogleTest"/>
+    </classes>
+  </test> <!-- Test -->
+</suite> <!-- Suite -->

@@ -1,0 +1,210 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>com.oath.automation</groupId>
+  <artifactId>SeleniumProject</artifactId>
+  <version>0.0.1-SNAPSHOT</version>
+  <name>SeleniumTestProject</name>
+  
+  <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <java.version>1.8</java.version>
+        <!--Dependency Versions-->
+        <maven-compiler-plugin.version>2.3.2</maven-compiler-plugin.version>
+        <selenium.version>3.141.59</selenium.version>
+        <testng.version>6.11</testng.version>
+        <poi.version>4.0.1</poi.version>
+    </properties>
+  
+  <build>
+		<plugins>
+			<!-- Compiler plug-in -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>${maven-compiler-plugin.version}</version>
+				<configuration>
+					<source>${java.version}</source>
+					<target>${java.version}</target>
+				</configuration>
+			</plugin>
+			<!-- Below plug-in is used to execute tests -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<version>2.18.1</version>
+				<configuration>
+                <properties>
+                    <property>
+                        <name>usedefaultlisteners</name>
+                        <value>true</value>
+                    </property>
+                    <property>
+                        <name>listener</name>
+                        <value>org.uncommons.reportng.HTMLReporter, org.uncommons.reportng.JUnitXMLReporter</value>
+                    </property>
+                </properties>
+                <systemProperties>
+                	<property>
+                		<name>org.uncommons.reportng.escape-output</name>
+                		<value>false</value>
+                	</property>
+                </systemProperties>
+				<suiteXmlFiles>
+					<!-- TestNG suite XML files -->
+					<suiteXmlFile>src\test\resources\SuiteFiles\GoogleTest.xml</suiteXmlFile>
+				</suiteXmlFiles>
+				</configuration>
+			</plugin>
+			
+			<plugin>
+				<artifactId>maven-assembly-plugin</artifactId>
+    			<configuration>
+      			<descriptorRefs>
+        			<descriptorRef>jar-with-dependencies</descriptorRef>
+      			</descriptorRefs>
+    			</configuration>
+ 			</plugin>
+ 
+      		<!-- Build an executable JAR -->			
+ 			 <plugin>
+      			  <groupId>org.apache.maven.plugins</groupId>
+      			  <artifactId>maven-jar-plugin</artifactId>
+      			  <version>3.1.0</version>
+      			  <configuration>
+        			<archive>
+          			<manifest>
+            		<addClasspath>true</addClasspath>
+            		<classpathPrefix>lib/</classpathPrefix>
+            		<mainClass>com.oath.automation.test.SeleniumTestClass</mainClass>
+          			</manifest>
+        			</archive>
+      			 </configuration>
+    		</plugin>
+ 
+		</plugins>
+	</build>
+	
+	<!-- Include the following dependencies -->
+	<dependencies>
+		<dependency>
+			<groupId>org.seleniumhq.selenium</groupId>
+			<artifactId>selenium-java</artifactId>
+			<version>${selenium.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.testng</groupId>
+			<artifactId>testng</artifactId>
+			<version>${testng.version}</version>
+		</dependency>
+		<dependency>
+        	<groupId>org.uncommons</groupId>
+        	<artifactId>reportng</artifactId>
+        	<version>1.1.2</version>
+        	<exclusions>
+            	<exclusion>
+                	<groupId>org.testng</groupId>
+                	<artifactId>testng</artifactId>
+            	</exclusion>
+            	<exclusion>
+                	<groupId>org.apache.velocity</groupId>
+                	<artifactId>velocity</artifactId>
+            	</exclusion>
+        	</exclusions>
+    	</dependency>
+    	<dependency>
+    		<groupId>com.google.inject</groupId>
+    		<artifactId>guice</artifactId>
+    		<version>3.0</version>
+    		<scope>test</scope>
+		</dependency>
+		<dependency>
+	        <groupId>commons-logging</groupId>
+	        <artifactId>commons-logging</artifactId>
+	        <version>1.1.1</version>
+		</dependency>
+		<dependency>
+  			<groupId>org.apache.poi</groupId>
+  			<artifactId>poi-ooxml</artifactId>
+  			<version>${poi.version}</version>
+		</dependency>
+		 <dependency>
+    		<groupId>log4j</groupId>
+    		<artifactId>log4j</artifactId>
+    		<version>1.2.17</version>
+		</dependency>
+		<dependency>
+    		<groupId>commons-io</groupId>
+    		<artifactId>commons-io</artifactId>
+    		<version>2.6</version>
+		</dependency>
+		<dependency>
+    		<groupId>com.sun.mail</groupId>
+    		<artifactId>javax.mail</artifactId>
+    		<version>1.6.0</version>
+		</dependency>
+		
+            <dependency>
+                <groupId>io.rest-assured</groupId>
+                <artifactId>rest-assured</artifactId>
+                <version>3.0.0</version>
+            </dependency>
+            
+            <dependency>
+    			<groupId>org.json</groupId>
+    			<artifactId>json</artifactId>
+    			<version>20180813</version>
+			</dependency>
+			
+			
+			<!-- https://mvnrepository.com/artifact/org.apache.httpcomponents/httpclient -->
+<dependency>
+    <groupId>org.apache.httpcomponents</groupId>
+    <artifactId>httpclient</artifactId>
+    <version>4.5.7</version>
+</dependency>
+
+ <!--Test reporting library - extent 3.X-->
+<dependency>
+    <groupId>com.relevantcodes</groupId>
+    <artifactId>extentreports</artifactId>
+    <version>2.41.2</version>
+</dependency>
+			
+<!-- https://mvnrepository.com/artifact/org.apache.poi/poi -->
+<dependency>
+    <groupId>org.apache.poi</groupId>
+    <artifactId>poi</artifactId>
+    <version>3.17</version>
+</dependency>
+
+<!-- https://mvnrepository.com/artifact/org.apache.poi/poi-ooxml -->
+<dependency>
+    <groupId>org.apache.poi</groupId>
+    <artifactId>poi-ooxml</artifactId>
+    <version>3.17</version>
+</dependency>
+
+<dependency>
+    <groupId>joda-time</groupId>
+    <artifactId>joda-time</artifactId>
+    <version>2.10</version>
+</dependency>
+
+<!-- https://mvnrepository.com/artifact/io.appium/java-client -->
+<dependency>
+    <groupId>io.appium</groupId>
+    <artifactId>java-client</artifactId>
+    <version>5.0.2</version>
+</dependency>
+
+<!-- https://mvnrepository.com/artifact/com.opencsv/opencsv -->
+<dependency>
+    <groupId>com.opencsv</groupId>
+    <artifactId>opencsv</artifactId>
+    <version>4.5</version>
+</dependency>
+
+		
+	</dependencies>
+</project>
